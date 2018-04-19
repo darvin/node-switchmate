@@ -45,10 +45,6 @@ function onFound(Switchmate) {
         // Switchmate.setAuthCode(auth);
     }
 
-    var targetState = process.argv[3];
-
-    console.log(Switchmate.advertisement.serviceUuids);
-
     Switchmate.discoverServices(['180f'], function(error, services) {
       var deviceBatteryService = services[0];
       console.log('discovered device battery service');
