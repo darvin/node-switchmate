@@ -45,15 +45,6 @@ function onFound(Switchmate) {
         // Switchmate.setAuthCode(auth);
     }
 
-    Switchmate.discoverServices(['180f'], function(error, services) {
-      var deviceBatteryService = services[0];
-      console.log('discovered device battery service');
-
-      deviceBatteryService.discoverCharacteristics(['2a19'], function(error, characteristics) {
-        console.log(characteristics);
-      });
-    });
-
     Switchmate.readBatteryLevel(function(data) {
         console.log('Switchmate reports: ' + data);
         process.exit();
