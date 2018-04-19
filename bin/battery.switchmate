@@ -46,7 +46,7 @@ function onFound(Switchmate) {
     }
 
     Switchmate.connectAndSetup(function() {
-        Switchmate.readBatteryLevel(function(data) {
+        Switchmate.readBatteryLevel(function(error, data) {
             console.log('Switchmate reports: ' + data);
             Switchmate.disconnect();
             process.exit();
