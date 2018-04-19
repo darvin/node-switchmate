@@ -47,6 +47,8 @@ function onFound(Switchmate) {
 
     var targetState = process.argv[3];
 
+    console.log(Switchmate);
+
     Switchmate.readBatteryLevel(function(data) {
         console.log('Switchmate reports: ' + data);
         process.exit();
