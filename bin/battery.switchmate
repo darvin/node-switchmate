@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+var SwitchmateDevice = require('../index').SwitchmateDevice;
+(validateArgs()) ? createBatterySession() : displayUsage();
+
+/**
+ * Validate commandline arguments.
+ * @returns {Boolean} True on valid, false on invalid.
+ */
+function validateArgs() {
+    var valid = (process.argv.length >= 3);
+    var invalidDataType = (typeof process.argv[2] === 'undefined');
+    valid = valid && !invalidDataType;
+    return valid;
+}
+
+/**
+ * Find the Switchmate and create the Toggle Session when found.
+ */
+function createBatterySession() {
+    var sm_id = process.argv[2].toLowerCase();
+    console.log('Locating ' + sm_id + '.');
+    SwitchmateDevice.discoverById(sm_id, onFound);
+}
+
+/**
+ * Display command line usage, then exit.
+ */
+function displayUsage(version) {
+    console.log('Usage for battery.switchmate:');
+    console.log('View Switchmate battery percentage\n');
+    if (version === 1)
+        console.log('battery.switchmate <switchmate_id> <auth_code>\n');
+    else
+        console.log('battery.switchmate <switchmate_id>\n');
+    process.exit();
+}
+
+function onFound(Switchmate) {
+    console.log('Found Switchmate v' + (Switchmate._version === 3 ? 3 : '1/2'));
+    if (Switchmate._version === 1) {
+        console.log('Switchmate version 1/2 not supported yet!');
+        return displayUsage(1);
+        // var auth = process.argv[3];
+        // if (!auth) return displayUsage(1);
+        // Switchmate.setAuthCode(auth);
+    }
+
+    var targetState = process.argv[3];
+
+    Switchmate.BatteryPercentage(function(data) {
+        console.log('Switchmate reports: ' + data);
+    });
+}
+
