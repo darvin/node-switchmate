@@ -45,9 +45,12 @@ function onFound(Switchmate) {
         // Switchmate.setAuthCode(auth);
     }
 
-    Switchmate.readBatteryLevel(function(data) {
-        console.log('Switchmate reports: ' + data);
-        process.exit();
+    Switchmate.connectAndSetup(function() {
+        Switchmate.readBatteryLevel(function(data) {
+            console.log('Switchmate reports: ' + data);
+            Switchmate.disconnect();
+            process.exit();
+        });
     });
 }
 
