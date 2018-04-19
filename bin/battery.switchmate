@@ -47,16 +47,11 @@ function onFound(Switchmate) {
 
     var targetState = process.argv[3];
 
-    console.log(Switchmate);
+    console.log(Switchmate.advertisement.serviceUuids);
 
-    Switchmate.discoverServicesAndCharacteristics(function(result) {
-        console.log(result);
-        console.log(Switchmate);
-
-        Switchmate.readBatteryLevel(function(data) {
-            console.log('Switchmate reports: ' + data);
-            process.exit();
-        });
+    Switchmate.readBatteryLevel(function(data) {
+        console.log('Switchmate reports: ' + data);
+        process.exit();
     });
 }
 
