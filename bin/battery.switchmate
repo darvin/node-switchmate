@@ -49,9 +49,14 @@ function onFound(Switchmate) {
 
     console.log(Switchmate);
 
-    Switchmate.readBatteryLevel(function(data) {
-        console.log('Switchmate reports: ' + data);
-        process.exit();
+    Switchmate.discoverServicesAndCharacteristics(function(result) {
+        console.log(result);
+        console.log(Switchmate);
+
+        Switchmate.readBatteryLevel(function(data) {
+            console.log('Switchmate reports: ' + data);
+            process.exit();
+        });
     });
 }
 
