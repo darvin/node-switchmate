@@ -8,7 +8,7 @@
   ],
   "author": "Evan McClintock",
   "dependencies": {
-    "noble-device": "github:nullent1ty/noble-device"
+    "noble-device": "github:darvin/noble-device"
   },
   "description": "A Node.js API for Switchmate",
   "main": "index.js",
